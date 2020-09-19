@@ -1,0 +1,28 @@
+<div class="row mb-5">
+    <div class="col-md-12">
+        <h3>{{page_title}}</h3>
+        <p *ngIf="!status">Crea una nueva categoria para el blog</p>
+
+        <div class="alert alert-success" *ngIf="status=='success'">
+            Datos registrados correctamente
+        </div>
+
+        <div class="alert alert-danger" *ngIf="status=='error'">
+            El registro no se ha completado
+        </div>
+
+        <form #categoryForm="ngForm" (ngSubmit)="onSubmit(categoryForm)" class="col-md-5">
+            <div class="form-group">
+                <label for="name">Nombre</label>
+                <input type="text" name="name" #name="ngModel" [(ngModel)]="category.name" class="form-control"
+                    required />
+                <div *ngIf="!name.valid && name.touched" class="invalid-feedback d-block">
+                    El campo nombre es obligatorio
+                </div>
+            </div>
+
+            <input type="submit" value="Guardar" class="btn btn-success float-right"
+                [disabled]="!categoryForm.form.valid" />
+        </form>
+    </div>
+</div>

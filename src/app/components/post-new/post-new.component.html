@@ -1,0 +1,52 @@
+<div class="row mb-5">
+    <div class="col-md-12">
+        <h3>{{page_title}}</h3>
+        <p *ngIf="!status">Crea una nueva entrada para el blog</p>
+
+        <div class="alert alert-success" *ngIf="status=='success'">
+            Datos registrados correctamente
+        </div>
+
+        <div class="alert alert-danger" *ngIf="status=='error'">
+            El registro no se ha completado
+        </div>
+
+        <div class="alert alert-success" *ngIf="!categories && !status">
+            Cargando...
+        </div>
+
+        <form #postForm="ngForm" (ngSubmit)="onSubmit(postForm)" class="col-md-5" *ngIf="categories">
+            <div class="form-group">
+                <label for="category_id">Categoria</label>
+                <select name="category_id" #category_id="ngModel" [(ngModel)]="post.category_id" class="form-control"
+                    required>
+                    <option value="0">Selecciona una opción</option>
+                    <option *ngFor="let category of categories" value="{{category.id}}">{{category.name}}</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="title">Título</label>
+                <input type="text" name="title" #title="ngModel" [(ngModel)]="post.title" class="form-control"
+                    required />
+                <div *ngIf="!title.valid && title.touched" class="invalid-feedback d-block">
+                    El campo título es obligatorio
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="content">Contenido</label>
+                <textarea [froalaEditor]="froala_options" name="content" #content="ngModel" [(ngModel)]="post.content"
+                    class="form-control" required></textarea>
+                <div *ngIf="!content.valid && content.touched" class="invalid-feedback d-block">
+                    El campo contenido es obligatorio
+                </div>
+            </div>
+            <div class="form-group">
+                <angular-file-uploader [config]="afuConfig" [resetUpload]=resetVar (ApiResponse)="imageUpload($event)">
+                </angular-file-uploader>
+            </div>
+
+            <input type="submit" value="Guardar" class="btn btn-success float-right"
+                [disabled]="!postForm.form.valid || post.category_id==0" />
+        </form>
+    </div>
+</div>

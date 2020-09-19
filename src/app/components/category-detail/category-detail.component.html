@@ -1,0 +1,7 @@
+<div class="row mb-5">
+    <div class="col-md-12">
+        <h3 *ngIf="category">Categoria: {{category.name}}</h3>
+
+        <app-post-list [posts]="posts" [page]="'category'" (ActualizarListado)="actualizarListado($event)"></app-post-list>
+    </div>
+</div>

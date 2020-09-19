@@ -24,9 +24,19 @@
               "src/assets"
             ],
             "styles": [
+              "./node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "./node_modules/font-awesome/css/font-awesome.css",
+              "./node_modules/froala-editor/css/froala_editor.pkgd.min.css",
+              "./node_modules/froala-editor/css/froala_style.min.css",
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [
+              "./node_modules/jquery/dist/jquery.min.js",
+              "./node_modules/@popperjs/core/dist/umd/popper.min.js",
+              "./node_modules/bootstrap/dist/js/bootstrap.min.js",
+              "./node_modules/froala-editor/js/froala_editor.pkgd.min.js",
+              "./node_modules/froala-editor/js/froala_editor.min.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -119,6 +129,7 @@
           }
         }
       }
-    }},
+    }
+  },
   "defaultProject": "angular-web"
 }

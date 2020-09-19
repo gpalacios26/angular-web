@@ -1,0 +1,28 @@
+<div class="alert alert-success mt-3" *ngIf="!posts">
+    Cargando...
+</div>
+
+<div class="alert alert-info mt-3" *ngIf="posts && posts.length == 0">
+    No hay entradas disponibles para mostrar
+</div>
+
+<div class="container-fluid mt-3" *ngIf="posts">
+    <div class="card-columns">
+        <div class="card" *ngFor="let post of posts">
+            <img src="assets/images/imagen-no-disponible.png" class="card-img-top" alt="{{post.title}}"
+                *ngIf="!post.image">
+            <img src="{{url + 'post/image/' + post.image}}" class="card-img-top" alt="{{post.title}}"
+                *ngIf="post.image">
+            <div class="card-body">
+                <h5 class="card-title">{{post.title}}</h5>
+                <p class="card-text text-right">
+                    <a [routerLink]="['/entrada', post.id]" class="btn btn-primary">Ver más</a>
+                    <span *ngIf="identity && identity.sub==post.user_id">
+                        <a [routerLink]="['/editar-entrada', post.id]" class="btn btn-warning ml-2">Editar</a>
+                        <a (click)="deletePost(post.id, page)" class="btn btn-danger ml-2">Borrar</a>
+                    </span>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
